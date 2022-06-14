@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "0ecccdd6-2009-42cc-b081-16bf171cc5e3",
+		"name": "proyecto2_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21147074"
+	},
+	"item": [
+		{
+			"name": "Register New User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Amadeo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "amadeo@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "6789",
+							"type": "text"
+						},
+						{
+							"key": "bio",
+							"value": "Soy W.A.Mozart y toco el piano y el violín",
+							"type": "text"
+						},
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/Users/josealor/Desktop/Bootcamp/Proyecto2/Proyecto2/uploads/9b127353-38d1-4e2c-85b1-b570097e775f..png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users/activate/c74793d3-ee33-4e65-a4bd-97fd0578af5c",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"activate",
+						"c74793d3-ee33-4e65-a4bd-97fd0578af5c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"amadeo@mail.com\",\n    \"password\": \"6789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Services",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register New Service",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjU1MTQyNDc3LCJleHAiOjE2NTc3MzQ0Nzd9.Mcbs0mpfKZAkmdXWBa3dEQU8caNqZv5fjW17cKuHLWk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Problemon",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Tengo que transportar esta partitura a LabM",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/josealor/Desktop/Bootcamp/Proyecto2/Proyecto2/image.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/services",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Submit comments and/or solution files",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjU1MTQyNDc3LCJleHAiOjE2NTc3MzQ0Nzd9.Mcbs0mpfKZAkmdXWBa3dEQU8caNqZv5fjW17cKuHLWk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "comment",
+							"value": "Comment about service with id 1",
+							"type": "text"
+						},
+						{
+							"key": "solvedFile",
+							"type": "file",
+							"src": "/Users/josealor/Desktop/Bootcamp/Proyecto2/Portal de necesidades.docx.pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/comments/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Service Status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNjU0ODk5MzM1LCJleHAiOjE2NTc0OTEzMzV9.NsZdy8UDOYevkYJzovCNNBrJ3SS37KgZMOwfX6zCnpY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/services/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"services",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWQiOjJ9.w3ywnggwbCP0nu_u5fMKWfalB-m3yGMJ1CTLiBoJc5U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mozart",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mozart@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "6789",
+							"type": "text"
+						},
+						{
+							"key": "bio",
+							"value": "He vuelto",
+							"type": "text"
+						},
+						{
+							"key": "picture",
+							"type": "file",
+							"src": "/Users/josealor/Desktop/Bootcamp/Proyecto2/Proyecto2/uploads/9b127353-38d1-4e2c-85b1-b570097e775f..png"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjU0OTQyODM2LCJleHAiOjE2NTc1MzQ4MzZ9.3iVwZKgvbq17r4F69N5G9vDZt_MUbieTi0nWt_1ASzk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

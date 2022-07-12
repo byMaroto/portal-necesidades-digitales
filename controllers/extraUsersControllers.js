@@ -53,11 +53,12 @@ const editUser = async (req, res, next) => {
     }
     console.log({ ...userDB, ...req.body });
     await updateUserData({ ...userDB, ...req.body });
+    const updatedUserInfo = await selectUserById(userId);
 
     res.status(201).send({
       status: "Ok",
       message: "Your profile has been updated",
-      data: { id: userId },
+      data: updatedUserInfo,
     });
   } catch (error) {
     next(error);

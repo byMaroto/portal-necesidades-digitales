@@ -3,6 +3,9 @@ const uploadFile = require("../helpers/uploadFile");
 const {
   selectServiceById,
   insertCommentsFile,
+  selectServiceByServiceId,
+  selectCommentsbyServiceId,
+  selectCommentbyCommentId,
 } = require("../repositories/commentsRepos");
 const commentSchema = require("../schemas/commentSchema");
 const { serviceIdSchema } = require("../schemas/servicesSchemas");
@@ -38,15 +41,35 @@ const sendCommentFile = async (req, res, next) => {
     }
 
     const insertID = await insertCommentsFile(commentData);
+    const newCommentInfo = await selectCommentbyCommentId(insertID);
 
     res.status(201).send({
       status: "ok",
       message: "You have successfully submited your comment and/or your work",
-      data: { comment_id: insertID },
+      data: newCommentInfo,
     });
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = sendCommentFile;
+const getCommentsbyServiceId = async (req, res, next) => {
+  try {
+    const { serviceId } = req.params;
+    const service = await selectServiceByServiceId(serviceId);
+    const comments = await selectCommentsbyServiceId(serviceId);
+
+    if (!service) {
+      throw generateError("There is no service", 400);
+    }
+
+    res.status(200).send({
+      status: "ok",
+      data: [service, comments],
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { sendCommentFile, getCommentsbyServiceId };

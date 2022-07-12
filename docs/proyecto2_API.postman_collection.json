@@ -111,6 +111,63 @@
 			"response": []
 		},
 		{
+			"name": "Get User Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNjU2NjkyMTkyLCJleHAiOjE2NTkyODQxOTJ9.0til_kiWSli3Y6s8woNOil1PXM3PFnpYFPkL9OKoCJc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Any User Info by Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjU2NjY5NTIzLCJleHAiOjE2NTkyNjE1MjN9.Te-y9FR1XSPuJO4yTu0VMAeLKPeRjCjmMKN-d85rI54",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/user/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Services",
 			"request": {
 				"auth": {
@@ -126,6 +183,35 @@
 					"port": "3000",
 					"path": [
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Service By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjU2NjA3NTI1LCJleHAiOjE2NTkxOTk1MjV9.fMFTrCY8VtlsQCDhSGg0ejjF8VPGAHeD_rU2RrYQGXc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/getservice/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"getservice",
+						"4"
 					]
 				}
 			},

@@ -55,9 +55,19 @@
     - password \*
   - Returning JWT token
 
+- GET /user
+
+  - Displays logged user details
+  - Authentication middleware
+
+- GET /user/:userId
+
+  - Displays any user details
+  - Authentication middleware
+
 - GET /
 
-  - Display of registered services
+  - Displays registered services and their authors
 
 - POST /services
 
@@ -75,6 +85,11 @@
   - Authentication middleware
   - Returning confirmation message
 
+- GET /services/user
+
+  - Displays services posted by their author
+  - Authentication middleware
+
 - POST /comments/:serviceId
 
   - Sending comment and/or solved file to a required service
@@ -83,6 +98,11 @@
     - comment
     - file
   - Returning confirmation message and comment id
+
+- GET /getcomments/:serviceId
+
+  - Displays comments and solved files of a given service
+  - Authentication middleware
 
 - PATCH /users
 

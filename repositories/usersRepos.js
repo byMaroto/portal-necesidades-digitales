@@ -44,9 +44,18 @@ const deleteRegistrationCode = async (userId) => {
   return affectedRows;
 };
 
+const selectUserInfoById = async (userId) => {
+  const [[data]] = await pool.query(`SELECT * FROM users WHERE id=?;`, [
+    userId,
+  ]);
+  console.log(data);
+  return data;
+};
+
 module.exports = {
   selectUserByEmail,
   insertUser,
   selectUserByActivationCode,
   deleteRegistrationCode,
+  selectUserInfoById,
 };

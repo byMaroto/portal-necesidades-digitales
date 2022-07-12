@@ -32,7 +32,7 @@ const initDB = async () => {
             title VARCHAR (100) NOT NULL,
             description VARCHAR (500) NOT NULL,
             service_file VARCHAR (150),
-            status BOOLEAN
+            status BOOLEAN NOT NULL DEFAULT 0
         );
     `);
 

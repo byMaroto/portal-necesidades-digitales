@@ -3,6 +3,7 @@ const {
   insertNewService,
   updateServiceStatus,
   selectServiceByServiceId,
+  selectServicesByUserId,
 } = require("../repositories/servicesRepos");
 const uploadFile = require("../helpers/uploadFile");
 const generateError = require("../helpers/generateError");
@@ -15,7 +16,7 @@ const getAllServices = async (req, res, next) => {
   try {
     const services = await selectServices();
 
-    if (!services) {
+    if (!services.length) {
       throw generateError("There are no services", 400);
     }
 
@@ -96,8 +97,27 @@ const setStatus = async (req, res, next) => {
   }
 };
 
+const getServicesbyUserId = async (req, res, next) => {
+  try {
+    const userId = req.auth.id;
+    const services = await selectServicesByUserId(userId);
+
+    if (!services.length) {
+      throw generateError("You haven't post any service yet", 400);
+    }
+
+    res.status(200).send({
+      status: "ok",
+      data: services,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllServices,
   registerService,
   setStatus,
+  getServicesbyUserId,
 };

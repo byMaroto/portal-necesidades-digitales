@@ -2,7 +2,9 @@ const getPool = require("../database/getPool");
 const pool = getPool();
 
 const selectServices = async () => {
-  const [services] = await pool.query(`SELECT * from services`);
+  const [services] = await pool.query(
+    `SELECT s.*, u.name serviceAuthor from services s LEFT JOIN users u ON s.user_id=u.id`
+  );
   return services;
 };
 
@@ -15,11 +17,12 @@ const insertNewService = async ({ userId, title, description, fileName }) => {
 };
 
 const selectServiceByServiceId = async (serviceId) => {
-  const [[algo]] = await pool.query(`SELECT * FROM services WHERE id=?`, [
-    serviceId,
-  ]);
-  console.log(algo);
-  return algo;
+  const [[data]] = await pool.query(
+    `SELECT S.*, u.name serviceAuthor FROM services s LEFT JOIN users u ON s.user_id = u.id WHERE s.id=?;`,
+    [serviceId]
+  );
+  console.log(data);
+  return data;
 };
 
 const updateServiceStatus = async (serviceId, userId) => {
@@ -30,9 +33,20 @@ const updateServiceStatus = async (serviceId, userId) => {
   console.log(affectedRows);
   return affectedRows;
 };
+
+const selectServicesByUserId = async (userId) => {
+  const [services] = await pool.query(
+    `SELECT s.*, u.name serviceAuthor from services s LEFT JOIN users u ON s.user_id=u.id WHERE u.id=?`,
+    [userId]
+  );
+  console.log(services);
+  return services;
+};
+
 module.exports = {
   selectServices,
   insertNewService,
-  selectServiceByServiceId,
   updateServiceStatus,
+  selectServiceByServiceId,
+  selectServicesByUserId,
 };

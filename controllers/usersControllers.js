@@ -3,7 +3,9 @@ const {
   insertUser,
   selectUserByActivationCode,
   deleteRegistrationCode,
+  selectUserInfoById,
 } = require("../repositories/usersRepos");
+const { selectServicesByUserId } = require("../repositories/servicesRepos");
 const generateError = require("../helpers/generateError");
 const { v4: uuidv4 } = require("uuid");
 const sendMail = require("../helpers/sendMail");
@@ -60,6 +62,7 @@ const registerUser = async (req, res, next) => {
 
     res.status(201).send({
       status: "ok",
+      message: "Please, check your email to confirm it's you!",
       data: { id: insertId, ...userData },
     });
   } catch (error) {
@@ -119,7 +122,48 @@ const loginUser = async (req, res, next) => {
       expiresIn: "30d",
     });
 
-    res.status(200).send({ status: "ok", data: { token } });
+    res.status(200).send({
+      status: "ok",
+      message: "User successfully logged!",
+      data: { token },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserInfo = async (req, res, next) => {
+  try {
+    const userId = req.auth.id;
+    const userInfo = await selectUserInfoById(userId);
+
+    if (!userInfo) {
+      throw generateError("This user does not exist", 400);
+    }
+    const userServices = await selectServicesByUserId(userId);
+
+    res.status(200).send({
+      status: "ok",
+      data: { ...userInfo, services: userServices },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAnyUserInfo = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const userInfo = await selectUserInfoById(userId);
+
+    if (!userInfo) {
+      throw generateError("This user does not exist", 400);
+    }
+
+    res.status(200).send({
+      status: "ok",
+      data: userInfo,
+    });
   } catch (error) {
     next(error);
   }
@@ -129,4 +173,6 @@ module.exports = {
   registerUser,
   activateUser,
   loginUser,
+  getUserInfo,
+  getAnyUserInfo,
 };
